@@ -7,13 +7,13 @@ plugins {
 }
 
 war {
-    archiveName = "springMVC.war"
+    archiveName = "apacheShiroMVC.war"
 }
 
 /** ================================================================================================================
  *                                                 Project Properties
  *  ================================================================================================================ */
-description = "Spring MVC Java Config Project"
+description = "Apache Shiro with Spring MVC"
 group = "net.example"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -28,6 +28,9 @@ repositories {
 
 dependencies {
     // core dependencies
+    compile "org.apache.shiro:shiro-core:$shiroVersion"
+    compile "com.h2database:h2:$h2Version"
+    compile "org.liquibase:liquibase-core:$liquibaseVersion"
     compile "org.springframework:spring-webmvc:$springVersion"
     compile "jstl:jstl:$jstlVersion"
     compileOnly "javax.servlet:javax.servlet-api:$servletVersion"
