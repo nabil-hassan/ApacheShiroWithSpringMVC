@@ -1,1 +1,12 @@
 .main {padding-left:1em}
+.errorMessage {color: red; font-style: italic;}
+
+div.smallForm {margin: 1em 0em 1em 1em; padding:0.3em 1em 1em 1em; background-color:#ffffff;
+    margin-right: auto; margin-left: auto; width: 50%; }
+
+div.formField {margin-bottom: 1em;}
+div.formField * {font-size:1em;}
+div.formField label {width:30%; float:left}
+
+div.formSubmitField {margin-top: 0.9em;}
+div.formSubmitField button {padding:0.5em 2.5em 0.5em 2.5em; font-size:0.9em;}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <!-- ====================================================================================
+         Title: populate-shiro-roles.xml
+
+         Description: populates the Apache Shiro database tables with some initial role data.
+
+         Date: 30/12/2016
+         ==================================================================================== -->
+
+    <changeSet id="populateShiroRoles" author="admin">
+        <preConditions>
+            <tableExists tableName="roles" schemaName="public"/>
+        </preConditions>
+
+        <comment>Creates initial Shiro roles.</comment>
+
+        <sql>
+            INSERT INTO roles(name,description)
+            VALUES('administrator', 'full access to all system functionality')
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
