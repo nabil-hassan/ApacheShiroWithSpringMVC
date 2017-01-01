@@ -9,7 +9,8 @@
     <link href="${default_css}" rel="stylesheet">
 
     <style>
-        .header {background-color: cadetblue; padding: 1em 1em 1em 1em}
+        .header {background-color: black; padding: 1em 1em 1em 1em}
+        .header h1 {color: white;}
     </style>
 </head>
 

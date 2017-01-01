@@ -5,7 +5,7 @@
 <html>
 <head>
     <style>
-        .footer {background-color: cadetblue; padding: 0.5em 0.5em 0.5em 0.5em; position:fixed;
+        .footer {background-color: #7d8084; padding: 0.5em 0.5em 0.5em 0.5em; position:fixed;
             bottom:0; width: 100%; text-align: center;}
         .footerField {margin-right:3em;}
         .footerField label {font-weight:800;}

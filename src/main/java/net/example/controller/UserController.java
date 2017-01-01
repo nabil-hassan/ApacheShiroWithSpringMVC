@@ -45,18 +45,6 @@ public class UserController {
     }
 
     /**
-     * Logs the user out and returns them to the login screen.
-     */
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String doLogout() {
-        LOG.debug("Received logout request");
-
-        userService.logoutUser();
-
-        return "redirect:/";
-    }
-
-    /**
      * Log the user in. If a login error occurs, display to the user.
      */
     @RequestMapping(value = "/loginForm/submit", method = RequestMethod.POST)
