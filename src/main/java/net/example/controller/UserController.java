@@ -42,13 +42,11 @@ public class UserController {
     public String showLoginPage() {
         LOG.debug("Request received for login page.");
 
-//        Subject user = SecurityUtils.getSubject();
-//        if (user.isAuthenticated()) {
-//            LOG.debug("User: {} is already authenticated. Returning index.", user.getPrincipal());
-//            return "index";
-//        }
+        if (userService.userIsAuthenticated()) {
+            LOG.debug("User already logged in. Redirect to welcome page.");
+            return "redirect:/";
+        }
 
-        // TODO: implement properly using UserService.isLoggedIn()
         return "login";
     }
 

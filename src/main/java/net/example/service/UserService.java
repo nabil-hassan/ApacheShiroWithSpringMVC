@@ -24,6 +24,13 @@ public class UserService {
     }
 
     /**
+     * Confirms whether the user is authenticated.
+     */
+    public boolean userIsAuthenticated() {
+        return SecurityUtils.getSubject().isAuthenticated();
+    }
+
+    /**
      * Attempts to login user; throws an Exception if unable to.
      */
     public void loginUser(String username, String password, Boolean rememberUser) throws Exception {
