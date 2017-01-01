@@ -10,7 +10,7 @@
 
     <style>
         .header {background-color: black; padding: 1em 1em 1em 1em}
-        .header h1 {color: white;}
+        .header h1 {color: white; text-align: center;}
     </style>
 </head>
 

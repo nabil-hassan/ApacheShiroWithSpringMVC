@@ -29,8 +29,6 @@
             <column name="username" type="varchar2(100)"/>
             <column name="password" type="varchar2(100)"/>
             <column name="password_salt" type="varchar2(100)"/>
-            <column name="forename" type="varchar2(100)"/>
-            <column name="surname" type="varchar2(100)"/>
         </createTable>
         
         <addPrimaryKey tableName="users" columnNames="id" constraintName="pk_users_id"/>

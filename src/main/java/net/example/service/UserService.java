@@ -6,17 +6,22 @@ import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.SimpleByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.AccountLockedException;
 import javax.security.auth.login.AccountNotFoundException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 public class UserService {
     
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
-    
     private UserDAO userDAO;
 
     public UserService(UserDAO userDAO) {
@@ -55,15 +60,22 @@ public class UserService {
     }
 
     /**
-     * Logs the current user out of the system.
+     * Creates a new user account with the specified credentials.
      */
-    public void logoutUser() {
-        Subject user = SecurityUtils.getSubject();
+    public void createUser(String username, String password) throws Exception {
+        if (username == null || password == null) {
+            throw new IllegalArgumentException("Username and password must be specified");
+        }
 
-        LOG.debug("Logging current user: {} out of system", user.getPrincipal());
+        if (userDAO.userExists(username)) {
+            throw new Exception("User: " + username +  "already exists");
+        }
 
-        SecurityUtils.getSubject().logout();
+        String salt = new BigInteger(250, new SecureRandom()).toString(32);
 
-        LOG.debug("User successfully logged out");
+        Sha256Hash hashedPassword = new Sha256Hash(password, (new SimpleByteSource(salt)).getBytes());
+
+        userDAO.createUser(username, hashedPassword.toHex(), salt);
     }
+
 }

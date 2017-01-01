@@ -77,27 +77,16 @@ public class UserController {
                                RedirectAttributes redirectAttributes) throws SQLException {
         LOG.debug("Create user request received for user: {}", username);
 
-        if (userDAO.userExists(username)) {
-            LOG.debug("User: '{}' already exists. Issuing error message.", username);
-            redirectAttributes.addFlashAttribute(CREATE_ERROR, "User: '" + username + "' already exists.");
-            redirectAttributes.addFlashAttribute("newUsrUsername", username);
-            redirectAttributes.addFlashAttribute("newUsrPassword", password);
-            return "redirect:/login";
-        }
-
-        userDAO.createUser(username, password);
-
         try {
+            userService.createUser(username, password);
             userService.loginUser(username, password, rememberMe);
             return "redirect:/";
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute(CREATE_ERROR, "Error logging created user in:" + ex.getMessage());
+            redirectAttributes.addFlashAttribute(CREATE_ERROR, ex.getMessage());
             redirectAttributes.addFlashAttribute("newUsrUsername", username);
             redirectAttributes.addFlashAttribute("newUsrPassword", password);
             return "redirect:/login";
         }
-
-        // TODO: spring mvc session attribute for username
     }
 
 }

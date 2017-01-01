@@ -15,7 +15,7 @@ import java.sql.*;
 public class UserDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserDAO.class);
-    private static final String CREATE_USER_QUERY = "INSERT INTO users(username, password) VALUES(?, ?)";
+    private static final String CREATE_USER_QUERY = "INSERT INTO users(username, password, password_salt) VALUES(?, ?, ?)";
     private static final String USER_EXISTS_QUERY = " SELECT COUNT(*) FROM users WHERE username = ?";
 
     private DataSource dataSource;
@@ -24,7 +24,7 @@ public class UserDAO {
         this.dataSource = dataSource;
     }
 
-    public void createUser(String username, String password) throws SQLException {
+    public void createUser(String username, String password, String salt) throws SQLException {
         LOG.debug("Create user : '{}'", username);
 
         Connection connection = dataSource.getConnection();
@@ -33,6 +33,7 @@ public class UserDAO {
             PreparedStatement query = connection.prepareStatement(CREATE_USER_QUERY);
             query.setString(1, username);
             query.setString(2, password);
+            query.setString(3, salt);
 
             query.executeUpdate();
         } catch(SQLException ex) {
