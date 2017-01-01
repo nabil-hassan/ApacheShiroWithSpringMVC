@@ -46,6 +46,7 @@ public class UserService {
         try {
             user.login(token);
             user.getSession().setAttribute("username", username);
+            user.getSession().setAttribute("loginTime", user.getSession().getStartTimestamp());
         } catch (CredentialsException|UnknownAccountException ex) {
             throw new Exception("Username/password not recognised");
         } catch (LockedAccountException ex) {
